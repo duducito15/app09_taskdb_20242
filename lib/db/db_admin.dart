@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:path/path.dart';
@@ -9,27 +8,28 @@ class DbAdmin {
   Database? myDatabase;
 
   //Singleton
-  DbAdmin db = DbAdmin._();
+  static final DbAdmin db = DbAdmin._();
   DbAdmin._();
   //
-  checkDatabase() {
+  Future<Database?> checkDatabase() async {
     if (myDatabase != null) {
       return myDatabase;
     }
-    myDatabase =  //;
+    myDatabase = await initDatabase(); //;
     return myDatabase;
   }
 
-  initDatabase() async{
+  Future<Database> initDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
-    String path = join(directory.path,"TaskDB.db");
-    await openDatabase(
+    String path = join(directory.path, "TaskDB.db");
+    return await openDatabase(
       path,
       version: 1,
-      onOpen: (db) {} ,
-      onCreate: (Database dbx, int version) {
-        dbx.execute("CREATE TABLE TASK(id PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, status TEXT)");
+      onOpen: (db) {},
+      onCreate: (Database dbx, int version) async {
+        await dbx.execute(
+            "CREATE TABLE TASK(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, status TEXT)");
       },
-      );
+    );
   }
 }

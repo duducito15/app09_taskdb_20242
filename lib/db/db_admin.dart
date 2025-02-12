@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -37,5 +38,36 @@ class DbAdmin {
     Database? db = await checkDatabase();
     int res = await db!.rawInsert(
         "INSERT INTO TASK(title, description, status) VALUES ('Pagar recibo de luz','sacar dinero e ii al agente de pago','false')");
+  }
+
+  insertTask() async {
+    Database? db = await checkDatabase();
+    int res = await db!.insert(
+      "TASK",
+      {
+        "title": "Comprar en la feria",
+        "description": "Los sabados en las americas",
+        "status": "false",
+      },
+    );
+  }
+
+  getRawTasks() async {
+    Database? db = await checkDatabase();
+    List tasks = await db!.rawQuery("SELECT * FROM TASK");
+    print(tasks);
+  }
+
+  getTasks() async {
+    Database? db = await checkDatabase();
+    List tasks = await db!.query("TASK");
+    print(tasks);
+  }
+
+  updateRawTask() async {
+    Database? db = await checkDatabase();
+    int res = await db!.rawUpdate(
+        "UPDATE TASK SET title = 'Pagar el agua', description = 'en emusap', status = 'true' WHERE id = 4");
+    print(res);
   }
 }

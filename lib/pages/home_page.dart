@@ -22,9 +22,21 @@ class HomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                DbAdmin.db.insertRawTask();
+                DbAdmin.db.insertTask();
               },
               child: Text("Insert task"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                DbAdmin.db.getTasks();
+              },
+              child: Text("Get tasks"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                DbAdmin.db.updateRawTask();
+              },
+              child: Text("Update task"),
             ),
           ],
         ),

@@ -70,4 +70,18 @@ class DbAdmin {
         "UPDATE TASK SET title = 'Pagar el agua', description = 'en emusap', status = 'true' WHERE id = 4");
     print(res);
   }
+
+  updateTask() async {
+    Database? db = await checkDatabase();
+    int res = await db!.update(
+      "TASK",
+      {
+        "title": "Cocinar",
+        "description": "menu del dia matasquita",
+        "status": "false",
+      },
+      where: "id = 3",
+    );
+    print(res);
+  }
 }

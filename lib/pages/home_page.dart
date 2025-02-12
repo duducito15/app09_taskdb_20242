@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                DbAdmin.db.updateRawTask();
+                DbAdmin.db.updateTask();
               },
               child: Text("Update task"),
             ),

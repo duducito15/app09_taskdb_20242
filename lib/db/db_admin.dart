@@ -32,4 +32,10 @@ class DbAdmin {
       },
     );
   }
+
+  insertRawTask() async {
+    Database? db = await checkDatabase();
+    int res = await db!.rawInsert(
+        "INSERT INTO TASK(title, description, status) VALUES ('Pagar recibo de luz','sacar dinero e ii al agente de pago','false')");
+  }
 }

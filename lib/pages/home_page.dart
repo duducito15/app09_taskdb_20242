@@ -38,6 +38,12 @@ class HomePage extends StatelessWidget {
               },
               child: Text("Update task"),
             ),
+            ElevatedButton(
+              onPressed: () {
+                DbAdmin.db.deleteTask();
+              },
+              child: Text("Delete task"),
+            ),
           ],
         ),
       ),

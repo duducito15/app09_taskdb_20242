@@ -84,4 +84,16 @@ class DbAdmin {
     );
     print(res);
   }
+
+  deleteRawTask() async {
+    Database? db = await checkDatabase();
+    int res = await db!.rawDelete("DELETE FROM TASK WHERE id = 4");
+    print(res);
+  }
+
+  deleteTask() async {
+    Database? db = await checkDatabase();
+    int res = await db!.delete("TASK", where: "id = 5");
+    print(res);
+  }
 }

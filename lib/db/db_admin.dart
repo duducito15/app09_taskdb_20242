@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app09_taskdb_20242/models/task_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -59,10 +60,14 @@ class DbAdmin {
     return tasks;
   }
 
-  Future<List<Map<String, dynamic>>> getTasks() async {
+  Future<List<TaskModel>> getTasks() async {
     Database? db = await checkDatabase();
     List<Map<String, dynamic>> tasks = await db!.query("TASK");
-    return tasks;
+    List<TaskModel> taskModelList = [];
+    tasks.forEach((element) {
+      print(element);
+    });
+    return taskModelList;
   }
 
   Future<int> updateRawTask() async {

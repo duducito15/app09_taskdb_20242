@@ -63,10 +63,13 @@ class DbAdmin {
   Future<List<TaskModel>> getTasks() async {
     Database? db = await checkDatabase();
     List<Map<String, dynamic>> tasks = await db!.query("TASK");
-    List<TaskModel> taskModelList = [];
-    tasks.forEach((element) {
-      print(element);
-    });
+    List<TaskModel> taskModelList =
+        tasks.map((e) => TaskModel.MapToModel(e)).toList();
+    // tasks.forEach((element) {
+    //   TaskModel task = TaskModel.MapToModel(element);
+    //   taskModelList.add(TaskModel.MapToModel(element));
+    // });
+    // print(taskModelList);
     return taskModelList;
   }
 

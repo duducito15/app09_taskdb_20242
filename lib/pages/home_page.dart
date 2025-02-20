@@ -17,7 +17,9 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context) {
         return MyFormWidget();
       },
-    );
+    ).then((value) {
+      setState(() {});
+    });
   }
 
   @override

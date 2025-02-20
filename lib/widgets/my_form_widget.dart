@@ -25,15 +25,22 @@ class _MyFormWidgetState extends State<MyFormWidget> {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Row(
-            children: [
-              Icon(
-                Icons.check_circle,
-                color: Colors.greenAccent,
-              ),
-              Text("Tarea registrada con éxito"),
-            ],
-          )),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.indigoAccent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            duration: Duration(milliseconds: 1400),
+            content: Row(
+              children: [
+                Icon(
+                  Icons.check_circle,
+                  color: Colors.greenAccent,
+                ),
+                Text("Tarea registrada con éxito"),
+              ],
+            ),
+          ),
         );
       }
     });

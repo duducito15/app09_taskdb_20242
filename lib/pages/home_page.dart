@@ -1,17 +1,36 @@
 import 'package:app09_taskdb_20242/db/db_admin.dart';
 import 'package:app09_taskdb_20242/models/task_model.dart';
+import 'package:app09_taskdb_20242/widgets/my_form_widget.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // DbAdmin.db.getTasks();
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  showDialogForm() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MyFormWidget();
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("TaskDb App"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialogForm();
+        },
+        child: Icon(Icons.add),
       ),
       body: FutureBuilder(
         future: DbAdmin.db.getTasks(),
